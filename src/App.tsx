@@ -1,13 +1,25 @@
 import React from 'react';
+import Home from "./components/home";
 
-import './App.css';
+import {Routes, Route} from "react-router-dom";
+import PrivateRoute from "./utils/router/privateRoute";
+import AuthRootComponent from "./components/auth";
 
 function App() {
-  return (
-    <div className="App">
+    return (
+        <div className="app">
 
-    </div>
-  );
+            <Routes>
+
+                <Route element={<PrivateRoute/>}>
+                    <Route path={'/'} element={<Home/>}/>
+                </Route>
+                <Route path={'login'} element={<AuthRootComponent/>}></Route>
+                <Route path={'register'} element={<AuthRootComponent/>}></Route>
+
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
