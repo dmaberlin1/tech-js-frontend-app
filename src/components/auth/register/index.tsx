@@ -19,7 +19,7 @@ const RegisterPage:React.FC<IPropsRegister> = (props:IPropsRegister):JSX.Element
             <TextField onChange={(e)=>setRepeatPassword(e.target.value)} type={'password'} fullWidth={true} margin={'normal'} label="Password" variant="outlined" placeholder={'Повторите ваш пароль'}/>
             <TextField onChange={(e)=>setTelegram(e.target.value)}  fullWidth={true} margin={'normal'} label="Telegram" variant="outlined" placeholder={'Введите ваш telegram'}/>
             <TextField onChange={(e)=>setPin(e.target.value)} type={'password'} fullWidth={true} margin={'normal'} label="PIN" variant="outlined" placeholder={'Введите ваш PIN'}/>
-            <Button sx={{fontFamily:'Poppins',marginTop:2,marginBottom:2,width:'60%'}} variant="contained">Регистрация</Button>
+            <Button type={'submit'} sx={{fontFamily:'Poppins',marginTop:2,marginBottom:2,width:'60%'}} variant="contained">Регистрация</Button>
             <Typography variant="body1" sx={{fontFamily:'Poppins',}} >
                 У вас есть аккаунт <span className={'incitingText'} onClick={()=>navigate('/login')}>Авторизация</span>
             </Typography>
