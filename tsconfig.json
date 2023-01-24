@@ -16,11 +16,13 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
+    //отключаем isolatedModules, поскольку наш проект не будет огромным, чтобы следить за модульностью
     "noEmit": true,
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "src/declaration.d.ts"
   ]
 }
