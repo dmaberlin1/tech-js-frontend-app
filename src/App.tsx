@@ -5,6 +5,7 @@ import PrivateRoute from "./utils/router/privateRoute";
 import AuthRootComponent from "./components/auth";
 import {useMode,ColorModeContext} from "./theme";
 import {CssBaseline,ThemeProvider} from '@mui/material'
+import LayoutComponent from "./components/layout";
 
 function App() {
     const[theme,colorMode]=useMode()
@@ -13,6 +14,7 @@ function App() {
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline></CssBaseline>
+                <LayoutComponent>
                 <div className="App">
                 <Routes>
                     <Route element={<PrivateRoute/>}>
@@ -22,7 +24,9 @@ function App() {
                     <Route path={'register'} element={<AuthRootComponent/>}></Route>
 
                 </Routes>
-            </div></ThemeProvider>
+            </div>
+                </LayoutComponent>
+                </ThemeProvider>
 
         </ColorModeContext.Provider>
     );

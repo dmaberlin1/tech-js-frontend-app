@@ -38,6 +38,18 @@ export const tokens = (mode: string) => ({
             800:'#F8CCC2',
             900:'#FADBD4',
         },
+        primary:{
+            DEFAULT: '#000000',
+            100:'#000000',
+            200:'#000000',
+            300:'#000000',
+            400:'#000000',
+            500:'#0F0E0E',
+            600:'#232323',
+            700:'#3D3D3D',
+            800:'#525252',
+            900:'#5C5C5C',
+        },
         black:{
             DEFAULT: '#000000',
             100:'#000000',
@@ -94,7 +106,13 @@ export const tokens = (mode: string) => ({
     }:{
         white:{
             DEFAULT:'#FFFFFF',
-            100:'#F7F7F7'
+            100:'#F7F7F7',
+            200:'#D1D1D1'
+
+        },
+        primary:{
+            DEFAULT: '#FFFFFF',
+            600:'#F7F7F7',
 
         },
         accentBlue:{
