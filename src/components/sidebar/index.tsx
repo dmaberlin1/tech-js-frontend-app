@@ -12,6 +12,7 @@ import {
     MenuBookOutlined, SettingsOutlined, LogoutOutlined,
 } from '@mui/icons-material';
 import {useLocation, useNavigate} from "react-router-dom";
+import FlexBetween from "../flex-between";
 
 const SidebarComponent = (props: any) => {
     const [active, setActive] = useState('');
@@ -27,13 +28,50 @@ const SidebarComponent = (props: any) => {
     //если же в массив зависимостей передаём какой-либо параметр,то уже сработает когда наше приложение будет
     //обновляться ( когда будет изменяться наш массив зависимостей)
     useEffect(()=>{
-
+    setActive(pathname.substring(1))
+        // .substring(1)   когда пользователь поменяет роут у нас будет лежать крайнее значение ,
+        //допустим login,news,watchlist , без всей строки "localhost:3000/login" и тп
     },[pathname])
 
     return (
-        <div>
-            <h1>This is sidebar</h1>
-        </div>
+        <Box component={'nav'}>
+            {isOpen &&(
+                <Drawer
+                    open={isOpen}
+                    //в зависимости от тру или фолс, откроеться ли наш Drawer
+                    onClose={()=>setIsOpen(false)}
+                    //с помощью onClose= мы будем понимать, закрывать или не закрывать данный Drawer
+                    //что делать в случае закрытия, у нас он меняет хук isOpen
+                    variant={'persistent'}
+                    anchor={'left'}
+                    //с какой стороны будет наш Drawer
+                    sx={{
+                        width:drawerWidth,
+                        '& .MuiDrawer-paper':{
+                            color:theme.palette.secondary.main,
+                            backgroundColor:theme.palette.primary.main,
+                            boxSizing:'border-box',
+                            width:drawerWidth
+                        }
+                        
+                    }}
+                >
+                    <Box width={'100%'}>
+                        <Box>
+                            <FlexBetween>
+                                <Box display={'flex'} alignItems={'center'} gap={'10px'}>
+                                    <Typography>Think Analytics</Typography>
+                                </Box>
+                                {!isNonMobile &&(
+                                    <IconButton onClick={()=>setIsOpen(!isOpen)}>
+                                    <ChevronLeftOutlined></ChevronLeftOutlined>
+                                </IconButton>)}
+                            </FlexBetween>
+                        </Box>
+                    </Box>
+                </Drawer>
+            )}
+        </Box>
     );
 };
 
