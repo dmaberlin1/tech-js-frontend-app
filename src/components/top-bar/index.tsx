@@ -12,18 +12,18 @@ const TopBarComponent = () => {
 //необходимо решить вопрос с '@mui/styles'
     // const {user}=useAppSelector(state => state.auth.user)
     const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    // const colors = tokens(theme.palette.mode)
     const colorMode: any = useContext(ColorModeContext)
     const classes=useStyles()
 
     return (
-        <Box display={'flex'} justifyContent='space-between' px='32px' py='24px'>
+        <Box className={classes.root}>
             <Grid>Welcome TestName</Grid>
             <Box display={'flex'}>
                 <Grid onClick={colorMode.toggleColorMode}
-                sx={{pr:'37px',borderRight:`1px solid ${colors.mineShaft.DEFAULT}`}}
+                className={classes.iconBlock}
                 >
-                    <IconButton sx={{mr:'45px'}}>
+                    <IconButton className={classes.themeIcon}>
                         {theme.palette.mode === 'light' ? <LightModeIcon/> : <DarkModeIcon></DarkModeIcon>}
                     </IconButton>
 
@@ -33,22 +33,12 @@ const TopBarComponent = () => {
                         <NotificationsNoneIcon></NotificationsNoneIcon>
                     </IconButton>
                 </Grid>
-                <Grid
-                    sx={{
-                        display:'flex',
-                        backgroundColor:`${colors.primary[600]}`,
-                        borderRadius:'8px',
-                        ml:'28px'
-                    }}
-                >
+                <Grid className={classes.searchBlock}>
 
-                    <IconButton       className={classes.root}>
+                    <IconButton       className={classes.searchIcon}>
                         <SearchIcon></SearchIcon>
                     </IconButton>
-                    <InputBase sx={{
-                                   px:'18px',py:'12px'
-
-                                }}
+                    <InputBase className={classes.searchInput}
                                placeholder={'Поиск'}></InputBase>
                 </Grid>
             </Box>

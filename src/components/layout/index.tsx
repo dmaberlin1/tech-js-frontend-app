@@ -4,11 +4,13 @@ import {ILayout} from "../../common/types/layout";
 import {useLocation} from "react-router-dom";
 import {Box, useMediaQuery} from "@mui/material";
 import SidebarComponent from "../sidebar";
+import {useStyles} from "./styles";
 
 const LayoutComponent = ({children}: ILayout) => {
     const [isOpen, setIsOpen] = useState(true);
     const location = useLocation()
     const isNonMobile = useMediaQuery('(min-width:600px)');
+    const classes=useStyles()
     return (
         location.pathname === '/login' || location.pathname === '/register'
             ? (
@@ -19,6 +21,7 @@ const LayoutComponent = ({children}: ILayout) => {
 
             ) : (
                 <Box display={isNonMobile ? 'flex' : 'block'}
+                     justifyContent={'space-between'}
                      width={'100%'}
                      height={'100%'}
                 >
@@ -28,7 +31,7 @@ const LayoutComponent = ({children}: ILayout) => {
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     ></SidebarComponent>
-                    <Box>
+                    <Box className={classes.mainSection}>
                         <TopBarComponent></TopBarComponent>
                         {children}
                     </Box>
