@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import TopBarComponent from "../top-bar";
-import {ILayout} from "../../common/types/layout";
-import {useLocation} from "react-router-dom";
+// import {ILayout} from "../../common/types/layout";
+import {Outlet, useLocation} from "react-router-dom";
 import {Box, useMediaQuery} from "@mui/material";
 import SidebarComponent from "../sidebar";
 import {useStyles} from "./styles";
 
-const LayoutComponent = ({children}: ILayout) => {
-    const [isOpen, setIsOpen] = useState(true);
+// const LayoutComponent = ({children}: ILayout) => {
+    const LayoutComponent = () => {
+
+    const [isOpen, setIsOpen] = useState(false);
     const location = useLocation()
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const classes=useStyles()
@@ -16,7 +18,7 @@ const LayoutComponent = ({children}: ILayout) => {
             ? (
                 <>
 
-                    {children}
+                    {/*{children}*/}
                 </>
 
             ) : (
@@ -27,13 +29,17 @@ const LayoutComponent = ({children}: ILayout) => {
                 >
                     <SidebarComponent
                         isNonMobile={isNonMobile}
-                        drawerWidth={'250'}
+                        drawerWidth={'250px'}
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     ></SidebarComponent>
                     <Box className={classes.mainSection}>
-                        <TopBarComponent></TopBarComponent>
-                        {children}
+                        <TopBarComponent
+                            setIsOpen={setIsOpen}
+                            isOpen={isOpen}
+                        ></TopBarComponent>
+                        {/*{children}*/}
+                        <Outlet></Outlet>
                     </Box>
                 </Box>
             )
