@@ -1,24 +1,42 @@
 import React from 'react';
 import Home from "./components/home";
-
 import {Routes, Route} from "react-router-dom";
 import PrivateRoute from "./utils/router/privateRoute";
 import AuthRootComponent from "./components/auth";
+import {useMode, ColorModeContext} from "./theme";
+import {CssBaseline, ThemeProvider} from '@mui/material'
+import LayoutComponent from "./components/layout";
+import NewsComponent from "./components/news";
+import Watchlist from "./components/watchlist";
+import SettingsComponent from "./components/settings";
+import WatchlistComponent from "./components/watchlist";
 
 function App() {
+    const [theme, colorMode] = useMode()
+
     return (
-        <div className="app">
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline></CssBaseline>
 
-            <Routes>
+                    <div className="App">
+                        <Routes>
+                            <Route element={<LayoutComponent/>}>
+                                <Route element={<PrivateRoute/>}>
+                                    <Route path={'/'} element={<Home/>}/>
+                                    <Route path={'/watchlist'} element={<WatchlistComponent/>}/>
+                                    <Route path={'/news'} element={<NewsComponent/>}/>
+                                    <Route path={'/settings'} element={<SettingsComponent/>}/>
+                                </Route>
+                                <Route path={'login'} element={<AuthRootComponent/>}></Route>
+                                <Route path={'register'} element={<AuthRootComponent/>}></Route>
+                            </Route>
+                        </Routes>
+                    </div>
 
-                <Route element={<PrivateRoute/>}>
-                    <Route path={'/'} element={<Home/>}/>
-                </Route>
-                <Route path={'login'} element={<AuthRootComponent/>}></Route>
-                <Route path={'register'} element={<AuthRootComponent/>}></Route>
+            </ThemeProvider>
 
-            </Routes>
-        </div>
+        </ColorModeContext.Provider>
     );
 }
 
