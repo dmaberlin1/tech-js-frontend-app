@@ -11,16 +11,21 @@ export interface IPropsLogin<
     errors: FieldErrors<TFieldValues>;
 }
 
-export interface IPropsRegister {
-    setEmail: (value: string) => void
-    setPassword: (value: string) => void
-    setFirstName: (value: string) => void
-    setRepeatPassword: (value: string) => void
-    setUsername: (value: string) => void
+export interface IPropsRegister<
+    TFieldValues extends FieldValues = FieldValues,
+    TContext = any,
+>  {
+    // setEmail: (value: string) => void
+    // setPassword: (value: string) => void
+    // setFirstName: (value: string) => void
+    // setRepeatPassword: (value: string) => void
+    // setUsername: (value: string) => void
 
-    setTelegram: (value: string) => void
-    setPin: (value: string) => void
+    // setTelegram: (value: string) => void
+    // setPin: (value: string) => void
     navigate:(to:string)=>void
+    register: UseFormRegister<TFieldValues>;
+    errors: FieldErrors<TFieldValues>;
 }
 
 export interface IAuthState {
@@ -35,7 +40,7 @@ export interface IPublicUser {
     firstName: string,
     username: string,
     email: string,
-    pin: string,
+    pin: number,
     telegram: string,
     createdAt: string,
     updatedAt: string,

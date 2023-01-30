@@ -10,16 +10,16 @@ import {login} from "../../store/slice/auth";
 import {AppErrors} from "../../common/errors";
 import {useForm} from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import {LoginSchema} from "../../utils/yup";
+import {LoginSchema, RegisterSchema} from "../../utils/yup";
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [username, setUsername] = useState('');
-    const [telegram, setTelegram] = useState('');
-    const [pin, setPin] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [repeatPassword, setRepeatPassword] = useState('');
+    // const [firstName, setFirstName] = useState('');
+    // const [username, setUsername] = useState('');
+    // const [telegram, setTelegram] = useState('');
+    // const [pin, setPin] = useState('');
     const location = useLocation()
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -30,7 +30,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
         },handleSubmit
     } = useForm({
         // mode:'onSubmit',
-        resolver:yupResolver(LoginSchema)
+        resolver:yupResolver(location.pathname==='/login'?LoginSchema:RegisterSchema)
     })
 
 
@@ -52,15 +52,15 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                 return e
             }
         } else {
-            if (password === repeatPassword) {
+            if (data.password === data.confirmPassword) {
                 try {
                     const userData = {
-                        firstName,
-                        username,
-                        email,
-                        password,
-                        pin,
-                        telegram,
+                        firstName:data.name,
+                        username:data.username,
+                        email:data.email,
+                        password:data.password,
+                        pin:data.pin,
+                        telegram:data.telegram,
                     }
                     const newUser = await instance.post('auth/register', userData)
                     console.log(newUser.data)
@@ -100,14 +100,9 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                             ></LoginPage>
                             : location.pathname === '/register'
                                 ? <RegisterPage
-                                    setEmail={setEmail}
-                                    setPassword={setPassword}
-                                    setFirstName={setFirstName}
-                                    setRepeatPassword={setRepeatPassword}
-                                    setUsername={setUsername}
-                                    setPin={setPin}
-                                    setTelegram={setTelegram}
                                     navigate={navigate}
+                                    errors={errors}
+                                    register={register}
                                 ></RegisterPage> : null}
                 </Box>
             </form>

@@ -25,10 +25,8 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 helperText={errors.email ? `${errors.email.message}` : ''}
                 // onChange={(e) => setEmail(e.target.value)}
                 {...register('email')}
-
                         // /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 // регулярка на проверку  написания  емейла
-
 
             />
 
@@ -40,10 +38,6 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 // onChange={(e) => setPassword(e.target.value)}
                 helperText={errors.password ? `${errors.password.message}` : ''}
                 {...register('password')}
-
-
-
-
             />
             <Button
                 sx={{fontFamily: 'Poppins', marginTop: 2, marginBottom: 2, width: '60%'}}
