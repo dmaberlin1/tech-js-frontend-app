@@ -332,7 +332,7 @@ export const themeSettings:any=(mode:string)=>{
     }
 }
 
-export const ColorModeContext:any=createContext({
+export const ColorModeContext:any=createContext<{toggleColorMode:()=>void}>({
     toggleColorMode:()=>{}
 })
 

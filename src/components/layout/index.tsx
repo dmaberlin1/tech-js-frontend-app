@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import TopBarComponent from "../top-bar";
 // import {ILayout} from "../../common/types/layout";
 import {Outlet, useLocation} from "react-router-dom";
@@ -7,7 +7,7 @@ import SidebarComponent from "../sidebar";
 import {useStyles} from "./styles";
 
 // const LayoutComponent = ({children}: ILayout) => {
-    const LayoutComponent = () => {
+    const LayoutComponent:FC = ():JSX.Element => {
 
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation()
