@@ -8,27 +8,41 @@ import {instance} from "../../utils/axios";
 import {useAppDispatch} from "../../utils/hook";
 import {login} from "../../store/slice/auth";
 import {AppErrors} from "../../common/errors";
+import {useForm} from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import {LoginSchema, RegisterSchema} from "../../utils/yup";
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [username, setUsername] = useState('');
-    const [telegram, setTelegram] = useState('');
-    const [pin, setPin] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [repeatPassword, setRepeatPassword] = useState('');
+    // const [firstName, setFirstName] = useState('');
+    // const [username, setUsername] = useState('');
+    // const [telegram, setTelegram] = useState('');
+    // const [pin, setPin] = useState('');
     const location = useLocation()
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const {
+        register,
+        formState:{
+            errors
+        },handleSubmit
+    } = useForm({
+        // mode:'onSubmit',
+        resolver:yupResolver(location.pathname==='/login'?LoginSchema:RegisterSchema)
+    })
 
 
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault()
+    // console.log(errors 'errors>>>' )
+    const handleSubmitForm = async (data:any) => {
+        // console.log(data 'data>>>' )
+        // e.preventDefault()
         if (location.pathname === '/login') {
             try {
                 const userData = {
-                    email: email,
-                    password: password
+                    email: data.email,
+                    password: data.password
                 }
                 const user = await instance.post('auth/login', userData)
                 await dispatch(login(user.data))
@@ -38,22 +52,22 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                 return e
             }
         } else {
-            if (password === repeatPassword) {
-              try {
-                  const userData = {
-                      firstName,
-                      username,
-                      email,
-                      password,
-                      pin,
-                      telegram,
-                  }
-                  const newUser = await instance.post('auth/register', userData)
-                  console.log(newUser.data)
-                  navigate('/')
-              }catch (e) {
-                  return e
-              }
+            if (data.password === data.confirmPassword) {
+                try {
+                    const userData = {
+                        firstName:data.name,
+                        username:data.username,
+                        email:data.email,
+                        password:data.password,
+                        pin:data.pin,
+                        telegram:data.telegram,
+                    }
+                    const newUser = await instance.post('auth/register', userData)
+                    console.log(newUser.data)
+                    navigate('/')
+                } catch (e) {
+                    return e
+                }
             } else {
                 throw new Error(AppErrors.PasswordDoNotMatch)
             }
@@ -63,7 +77,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
 
     return (
         <div className={'root'}>
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
                 <Box
                     display={'flex'}
                     justifyContent={'center'}
@@ -78,20 +92,17 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     {
                         location.pathname === '/login'
                             ? <LoginPage
-                                setEmail={setEmail}
-                                setPassword={setPassword}
+                                // setEmail={setEmail}
+                                // setPassword={setPassword}
                                 navigate={navigate}
+                                register={register}
+                                errors={errors}
                             ></LoginPage>
                             : location.pathname === '/register'
                                 ? <RegisterPage
-                                    setEmail={setEmail}
-                                    setPassword={setPassword}
-                                    setFirstName={setFirstName}
-                                    setRepeatPassword={setRepeatPassword}
-                                    setUsername={setUsername}
-                                    setPin={setPin}
-                                    setTelegram={setTelegram}
                                     navigate={navigate}
+                                    errors={errors}
+                                    register={register}
                                 ></RegisterPage> : null}
                 </Box>
             </form>
