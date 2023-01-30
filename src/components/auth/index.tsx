@@ -9,6 +9,8 @@ import {useAppDispatch} from "../../utils/hook";
 import {login} from "../../store/slice/auth";
 import {AppErrors} from "../../common/errors";
 import {useForm} from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import {LoginSchema} from "../../utils/yup";
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
     const [email, setEmail] = useState('');
@@ -26,7 +28,10 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
         formState:{
             errors
         },handleSubmit
-    } = useForm()
+    } = useForm({
+        // mode:'onSubmit',
+        resolver:yupResolver(LoginSchema)
+    })
 
 
     // console.log(errors 'errors>>>' )

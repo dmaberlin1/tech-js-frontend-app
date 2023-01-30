@@ -24,12 +24,11 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 placeholder={'Введите ваш email'}
                 helperText={errors.email ? `${errors.email.message}` : ''}
                 // onChange={(e) => setEmail(e.target.value)}
-                {...register('email',{
-                    required:'Это обязательное поле',
-                    // pattern:
+                {...register('email')}
+
                         // /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 // регулярка на проверку  написания  емейла
-                })}
+
 
             />
 
@@ -40,11 +39,10 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 placeholder={'Введите ваш пароль'}
                 // onChange={(e) => setPassword(e.target.value)}
                 helperText={errors.password ? `${errors.password.message}` : ''}
+                {...register('password')}
 
-                {...register('password',{
-                    required:'Это обязательное поле',
-                    minLength:7
-                })}
+
+
 
             />
             <Button
@@ -63,3 +61,9 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
 };
 
 export default LoginPage;
+
+//
+// {...register('password',{
+//     required:'Это обязательное поле',
+//     minLength:7
+// })}
