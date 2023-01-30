@@ -38,6 +38,11 @@ export const useStyles = makeStyles((theme: Theme) => {
             color: `${theme.palette.mode === 'dark'
                 ? colors.white.DEFAULT
                 : colors.black.DEFAULT}`
+        },
+        active:{
+            backgroundColor:'#1900D5 !important',
+            color: '#fff !important',
+            borderRadius:'4px !important',
         }
     })
 })
