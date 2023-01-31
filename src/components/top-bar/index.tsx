@@ -23,7 +23,7 @@ const TopBarComponent:FC<ITopBarProps> = (props:ITopBarProps):JSX.Element => {
                        <FlexBetween>
                            <MenuOutlined className={classes.menuIcon} onClick={()=>setIsOpen(!isOpen)}></MenuOutlined>
                            <Typography variant={'h3'}>
-                               Welcome TestName
+                               Welcome {sessionStorage.getItem('name')}
                            </Typography>
                        </FlexBetween>
                               <Box display={'flex'}>
