@@ -1,12 +1,12 @@
 import React, {Fragment} from 'react';
 import {TextField, Typography, Box} from "@mui/material";
 import {IPropsRegister} from "../../../common/types/auth";
-import AppButton from "../../../components/app-button";
 import {useStyles} from "./style";
+import AppLoadingButton from '../../../components/loading-button';
 
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
-    const {navigate, register, errors} = props
+    const {navigate, register, errors,loading} = props
     const classes = useStyles()
     return (
         <Fragment>
@@ -91,10 +91,11 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 />
             </Box>
 
-            <AppButton
+            <AppLoadingButton
                 type={'submit'}
                 variant="contained">Регистрация
-            </AppButton>
+                loading={loading}
+            </AppLoadingButton>
             <Box margin='20px 0'>
                 <Typography variant="body1">
                     У вас есть аккаунт <span className={classes.incitingText}
