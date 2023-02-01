@@ -7,11 +7,13 @@ import {current} from "@reduxjs/toolkit";
 import AreaChart from "../../components/charts/area-chart";
 import TrendUp from '../../assets/images/chart/trend-up.svg'
 import TrendDown from '../../assets/images/chart/trend-down.svg'
+import LineChart from "../../components/charts/line-chart";
+import {IChartData} from '../../common/types/assets'
 
 
 const Home: FC = (): JSX.Element => {
     const classes = useStyles()
-    const favoriteAssets: any[] = useAppSelector(state => state.assets.favoriteAssets)
+    const favoriteAssets: IChartData[] = useAppSelector(state => state.assets.favoriteAssets)
     const dispatch = useAppDispatch()
     const fetchDataRef = useRef(false)
 
@@ -54,10 +56,10 @@ const Home: FC = (): JSX.Element => {
                             <h3 className={classes.cardPrice}> ${currentPrice}</h3>
                             <Box
                                 className={
-                                changePrice>0
-                                    ? `${classes.priceTrend} ${classes.trendUp}`
-                                    : `${classes.priceTrend} ${classes.trendDown}`
-                            }
+                                    changePrice > 0
+                                        ? `${classes.priceTrend} ${classes.trendUp}`
+                                        : `${classes.priceTrend} ${classes.trendDown}`
+                                }
                             >
                                 {changePrice > 0 ? (
                                         <img src={TrendUp} alt="TrendUp"/>
@@ -70,7 +72,7 @@ const Home: FC = (): JSX.Element => {
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6}>
-                        <AreaChart data={item.data}/>
+                        <AreaChart data={item.price_chart_data}/>
                     </Grid>
 
                 </Grid>
@@ -81,8 +83,13 @@ const Home: FC = (): JSX.Element => {
     return (
         <Box className={classes.root}>
 
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.areaChart}>
                 {renderFavoriteBlock}
+            </Grid>
+            <Grid container className={classes.lineChartBlock}>
+                <Grid item xs={12} sm={12} lg={12}>
+                    {filteredArray.length && <LineChart data={filteredArray}></LineChart>}
+                </Grid>
             </Grid>
         </Box>
     );
