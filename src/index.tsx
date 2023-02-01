@@ -13,12 +13,17 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
+
         <Provider store={store}>
             <BrowserRouter>
                 <App />
             </BrowserRouter>
         </Provider>
-    </React.StrictMode>
+
+     </React.StrictMode>
+    //StrictMode помогает отловить на раннем этапе некоторые ошибки , нежелательные sideEffects, и тп
+    //делает это путём двойного вызова, следующих фций :компонент конструктора класса,некоторые методы для пов
+    //торного рендера, componentUpdate,
 );
 
 // If you want to start measuring performance in your app, pass a function
