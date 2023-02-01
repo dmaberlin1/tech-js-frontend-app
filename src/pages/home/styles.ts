@@ -3,55 +3,69 @@ import {tokens} from "../../theme";
 import {Theme} from "@mui/material";
 
 
-export const useStyles=makeStyles((theme:Theme)=>{
-    const colors=tokens(theme.palette.mode)
-    return{
-        root:{
-            flexGrow:1,
-            padding:'32px'
+export const useStyles = makeStyles((theme: Theme) => {
+    const colors = tokens(theme.palette.mode)
+    return {
+        root: {
+            flexGrow: 1,
+            padding: '32px'
         },
-        assetName:{
-          fontSize:25,
-          fontWeight:600,
-          lineHeight:'30px',
-          textTransform:'capitalize'
+        areaChart: {
+            marginBottom: 32,
         },
-        itemDetails:{
-          display:'flex',
-          height:'100%',
-          flexDirection:'column',
-          justifyContent:'flex-end',
-          paddingBottom:'35px'
+        assetName: {
+            fontSize: 25,
+            fontWeight: 600,
+            lineHeight: '30px',
+            textTransform: 'capitalize'
         },
-        cardPrice:{
-            fontSize:32,
-            fontWeight:700,
-            lineHeight:'48px'
+        itemDetails: {
+            display: 'flex',
+            height: '100%',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            paddingBottom: '35px'
         },
-        priceTrend:{
+        cardPrice: {
+            fontSize: 32,
+            fontWeight: 700,
+            lineHeight: '48px'
+        },
+        priceTrend: {
             // color:`${colors.secondary.DEFAULT}`,
-            width:'20%',
-            display:'flex',
-            alignItems:'center',
-            padding:'2px',
+            width: '20%',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '2px',
             // backgroundColor:'#A9FFA7',
-            borderRadius:4,
-            },
-        trendUp:{
-            backgroundColor:'#A9FFA7',
-            color:'#037400'
+            borderRadius: 4,
         },
-        trendDown:{
-            backgroundColor:'#ffa7a7',
-            color:'#740000'
+        trendUp: {
+            backgroundColor: '#A9FFA7',
+            color: '#037400'
         },
-
-        // topCardItem:{
-        //     backgroundColor:`${theme.palette.mode==="light"?colors.primary.DEFAULT:colors.primary[600]}`,
-        //     padding:'20px 16px',
-        //     minHeight:185,
-        //     border:`1px solid ${colors.borderColor}`,
-        //     borderRadius:12
-        // }
+        trendDown: {
+            backgroundColor: '#ffa7a7',
+            color: '#740000'
+        },
+        lineChartBlock: {
+            backgroundColor: `${
+                theme.palette.mode === 'light'
+                    ? colors.primary.DEFAULT
+                    : colors.primary[600]
+            }`,
+            padding: '20px 16px',
+            minHeight: 270,
+            border: `1px solid ${colors.borderColor}`,
+            borderRadius: 12,
+        },
+        topCardItem:{
+    backgroundColor:`${theme.palette.mode==="light"?colors.primary.DEFAULT:colors.primary[600]}`,
+    padding:'20px 16px',
+    minHeight:185,
+    border:`1px solid ${colors.borderColor}`,
+    borderRadius:12
+}
     }
 })
+
