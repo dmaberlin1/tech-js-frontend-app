@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {AppBar, Box, Grid, IconButton, InputBase, Toolbar, Typography, useTheme} from "@mui/material";
 import {useAppSelector} from "../../utils/hook";
 import {LightMode,DarkMode,NotificationsNone,Search,MenuOutlined} from '@mui/icons-material/';
@@ -6,8 +6,9 @@ import {LightMode,DarkMode,NotificationsNone,Search,MenuOutlined} from '@mui/ico
 import {ColorModeContext, tokens} from "../../theme";
 import {useStyles} from "./styles";
 import FlexBetween from "../flex-between";
+import {ITopBarProps} from "../../common/types/topbar";
 
-const TopBarComponent = (props:any) => {
+const TopBarComponent:FC<ITopBarProps> = (props:ITopBarProps):JSX.Element => {
 //необходимо решить вопрос с '@mui/styles'
     // const {user}=useAppSelector(state => state.auth.user)
     const theme = useTheme()
@@ -22,7 +23,7 @@ const TopBarComponent = (props:any) => {
                        <FlexBetween>
                            <MenuOutlined className={classes.menuIcon} onClick={()=>setIsOpen(!isOpen)}></MenuOutlined>
                            <Typography variant={'h3'}>
-                               Welcome TestName
+                               Welcome {sessionStorage.getItem('name')}
                            </Typography>
                        </FlexBetween>
                               <Box display={'flex'}>

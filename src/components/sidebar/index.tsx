@@ -1,22 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useStyles} from "./styles";
 import {
-    Box, Drawer, Divider, IconButton, List, ListItem,
+    Box, Drawer, IconButton, List, ListItem,
     ListItemButton, ListItemIcon, ListItemText, Typography, useTheme,
 } from '@mui/material'
 //List это оболочка для ul списка
 //ListItem это оболочка для li списка
 import {
     ChevronLeftOutlined,
-    ChevronRightOutlined, LogoutOutlined,
+    LogoutOutlined,
 } from '@mui/icons-material';
 import {useLocation, useNavigate} from "react-router-dom";
 import FlexBetween from "../flex-between";
 import {navMenu} from "../../common/moks/navigate";
 import Logo from '../../assets/images/sidebar/neraex.svg'
 import {tokens} from "../../theme";
+import {ISidebarProps} from "../../common/types/sidebar";
 
-const SidebarComponent = (props: any) => {
+const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
     const [active, setActive] = useState('');
     const {isNonMobile, drawerWidth, isOpen, setIsOpen} = props
     const classes = useStyles()
@@ -32,7 +33,7 @@ const SidebarComponent = (props: any) => {
     //если же в массив зависимостей передаём какой-либо параметр,то уже сработает когда наше приложение будет
     //обновляться ( когда будет изменяться наш массив зависимостей)
     useEffect(() => {
-        setActive(pathname.substring(1))
+        setActive(pathname)
         // .substring(1)   когда пользователь поменяет роут у нас будет лежать крайнее значение ,
         //допустим login,news,watchlist , без всей строки "localhost:3000/login" и тп
     }, [pathname])
@@ -40,7 +41,11 @@ const SidebarComponent = (props: any) => {
     const getNavMenu = navMenu.map((item): JSX.Element => {
         return (
             <ListItem key={item.id}>
-                <ListItemButton onClick={() => navigate(`${item.path}`)} className={classes.navItem}>
+                <ListItemButton
+                    onClick={() => navigate(`${item.path}`)}
+                    className={active === item.path
+                        ? `${classes.navItem} ${classes.active}` :classes.navItem}
+                >
                     <ListItemIcon>{item.icon}</ListItemIcon>
                     {/*в варианте подгрузки с бекенда лучше использовать строчное*/}
                     {/*добавление, например fontawesome,applyicons*/}
@@ -78,7 +83,7 @@ const SidebarComponent = (props: any) => {
 
                     }}
                 >
-                    <Box  className={classes.navBlock}>
+                    <Box className={classes.navBlock}>
                         <Box>
                             <FlexBetween>
                                 <Box className={classes.brand}>
