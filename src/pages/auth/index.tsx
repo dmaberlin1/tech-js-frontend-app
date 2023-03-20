@@ -34,6 +34,8 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
         resolver:yupResolver(location.pathname==='/login'?LoginSchema:RegisterSchema)
     })
 
+    
+
 
     // console.log(errors 'errors>>>' )
     const handleSubmitForm = async (data:any) => {
